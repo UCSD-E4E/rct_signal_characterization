@@ -8,7 +8,7 @@ This repo contains any and all CSE 145/237D project code utilized during UCSD's 
 
 (1) Integrate and parse an external Ublox m8n GPS module into the payload of a new aerial platform, the 3DR Solo. This task will comprise of writing a python script for the Intel Joule, a Linux microcomputer. 
 
-(2) Design a new user interface for starting and stopping data logging with visual indicators of 3D GPS fix. This task will comprise of writing a bash script for the Intel Joule, as well as a script for an external web GUI. The scripts for this section of the project can be found under the scripts subfolder of the repository.
+(2) Design a new user interface for starting and stopping data logging with visual indicators of 3D GPS fix. This task will comprise of writing a bash script for the Intel Joule, as well as a script for an external web GUI. The scripts for this section of the project can be found under the UI-Script subfolder of the repository.
 
 (3) Emulate a radio collar’s power output in various waveforms using a USRP. This task will comprise of utilizing and implementing the open source SDR library GNURadio.
 

@@ -12,6 +12,8 @@ This repo contains any and all CSE 145/237D project code utilized during UCSD's 
 
 (3) Emulate a radio collar’s power output in various waveforms using a USRP. This task will comprise of utilizing and implementing the open source SDR library GNURadio.
 
+The team contains four members this quarter. Samuel Vineyard is working on (1). Thomas An is working on (2). Naveen Ketagoda and Daniel Knapp are working on (3).
+
 This repo will push its final software deliverables to the main E4E Radio Collar Tracker repo: https://github.com/UCSD-E4E/radio_collar_tracker_drone. The following open source repos are used in this project:
 
 (1) Ublox binary data parsing: https://github.com/tridgeIn/pyUblox

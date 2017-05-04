@@ -2,8 +2,11 @@
 This repo contains any and all CSE 145/237D project code utilized during UCSD's academic spring quarter 2017 to improve upon a design to track animal radio collars from autonomous drones. The following improvements will be implemented:
 
 (1) Integrate and parse an external Ublox m8n GPS module into the payload of a new aerial platform, the 3DR Solo. 
+    - This task will comprise of writing a python script for the Intel Joule, a Linux microcomputer 
 (2) Design a new user interface for starting and stopping data logging with visual indicators of 3D GPS fix. 
+    - This task will comprise of writing a bash script for the Intel Joule, as well as a script for an external web GUI.
 (3) Emulate a radio collar’s power output in various waveforms using a USRP.
+    - This task will comprise of utilizing and implementing the open source SDR library GNURadio.
 
 This repo will push its fianal software deliverables to the main E4E Radio Collar Tracker repo: https://github.com/UCSD-E4E/radio_collar_tracker_drone. The following open source repos are used in this project:
 

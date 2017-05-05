@@ -43,25 +43,16 @@ for f in args:
             # Print GPS fix data from NAV_SOL
             elif 'NAV_SOL:' in ubxMsgFields:
                 if 'gpsFix=0,' in ubxMsgFields:
-                    print 'GPS has no fix'
                     log.write('GPS_FIX: 0 NO FIX\n')
                 elif 'gpsFix=1,' in ubxMsgFields:
-                    print 'GPS has dead reckoning'
                     log.write('GPS_FIX: 1 DEAD RECKONING\n') 
                 elif 'gpsFix=2,' in ubxMsgFields:
-                    print 'GPS has 2D fix'
-                    log.write('GPS_FIX 2 2D FIX\n')
+                    log.write('GPS_FIX: 2 2D FIX\n')
                 elif 'gpsFix=3,' in ubxMsgFields:
-                    print 'GPS has 3D fix'
-                    log.write('GPS_FIX 3 3D FIX\n')
+                    log.write('GPS_FIX: 3 3D FIX\n')
                 elif 'gpsFix=4,' in ubxMsgFields:
-                    print 'GPS has GPS + dead reckoning'
-                    log.write('GPS_FIX 4 DEAD RECKONING\n')
+                    log.write('GPS_FIX: 4 DEAD RECKONING\n')
                 elif 'gpsFix=5,' in ubxMsgFields:
-                    print 'GPS has time only fix'
-                    log.write('GPS_FIX 5 TIME ONLY\n')
+                    log.write('GPS_FIX: 5 TIME ONLY\n')
                 else:
-                    print '--------------------------'
-                    print 'ERROR: NO GPS FIX DATA' 
-                    print '--------------------------'
-                    log.write('GPS_FIX ERROR NO GPS FIX DATA')
+                    log.write('GPS_FIX: ERROR NO GPS FIX DATA')

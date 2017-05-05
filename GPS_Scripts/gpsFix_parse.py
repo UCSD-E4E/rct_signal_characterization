@@ -7,7 +7,7 @@ Usage: gpsFix_parse.py [--show] <file/serial port>
 The --show option is to show NAV_SOL messages containing GPS fix data.
 
 '''
-import ublox, sys, fnmatch, os
+import ublox
 
 from optparse import OptionParser
 
@@ -16,11 +16,8 @@ parser.add_option("--show", action='store_true', default=False, help='Show all U
 
 (opts, args) = parser.parse_args()
 
+# multiple files/serial ports can be specified
 for f in args:
-    if opts.show:
-        print('Printing all UBX messages from %s' % f)
-    else:
-        print('Parsing %s for GPS 3D fix' % f)
     dev = ublox.UBlox(f)
     with open('/var/log/gpsFix.log','a') as log:
         while True:
@@ -29,7 +26,6 @@ for f in args:
             msg = dev.receive_message()
             if msg is None:
                 break
-            buf1 = msg._buf[:]
             msg.unpack()
             ubxMsg = str(msg)
             ubxMsgFields = ubxMsg.split()

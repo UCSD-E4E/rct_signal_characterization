@@ -3,14 +3,19 @@
 Parse for 3D fix status, position in lat/long, and GPS time of the week
 
 Usage: ./gps_logger.py [-m <show>] [-o <destination>] [-p <prefix>]
-#        [-s <suffix>] [-r <runNum>] [-i port #] [-b baud rate]
+        [-s <suffix>] [-r <runNum>] [-i port #] [-b baud rate]
 
 '''
+
+# TODO: check if UBX library exposes week for GPS time of week
+# TODO: add vx, vy, vz, relative alt, heading to gps logging 
+
 import ublox
 import argparse
 import signal
 import re
 import os 
+import time 
 
 def handler(signum, frame):
     global runstate
@@ -45,7 +50,6 @@ if not os.path.exists(dataDir):
     os.makedirs(dataDir)
 
 logFile = open("%s/%s%06d" % (dataDir, gpsPrefix, runNum), "w")
-logFile.write('Timestamp | Longitude | Latitude | Altitude\n')
 
 dev = ublox.UBlox(port)
 while runstate:
@@ -62,24 +66,14 @@ while runstate:
     if show: 
         print ubxMsg 
 
-    # Log GPS fix data
-    elif 'NAV_STATUS:' in ubxMsgFields:
-        fixFile = open("/var/log/gpsFix.log","a")
-        ubxMsgItems = re.split(': |, |=',ubxMsg)
-        gpsTime = ubxMsgItems[2]
-        if 'gpsFix=3,' in ubxMsgFields:
-            fixFile.write('%s True\n' % gpsTime)
-        else:
-            fixFile.write('%s False\n' % gpsTime)
-        fixFile.close()
-
     # Log position (lat,long,alt) and GPS time 
     elif 'NAV_POSLLH:' in ubxMsgFields:
         ubxMsgItems = re.split(': |, |=',ubxMsg)
+        locTime = time.time()
         gpsTime = ubxMsgItems[2]
         lon = ubxMsgItems[4]
         lat = ubxMsgItems[6]
         alt = ubxMsgItems[8]
-        logFile.write('%s %s %s %s\n' % (gpsTime, lon, lat, alt))
+        logFile.write('%s, %s, %s, %s, %s\n' % (locTime, lon, lat, gpsTime, alt))
 print("GPS_LOGGER: Ending thread")
 logFile.close()

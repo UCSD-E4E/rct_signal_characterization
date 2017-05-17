@@ -51,14 +51,6 @@ if not os.path.exists(dataDir):
 
 logFile = open("%s/%s%06d" % (dataDir, gpsPrefix, runNum), "w")
 
-# create an offset for global timestamp
-ref_time = time.time()
-gps_time = 0
-offset = gps_time - ref_time 
-
-# use boolean variable to read in initial altitude for relative altitude headings
-firstParse = True
-
 dev = ublox.UBlox(port)
 while runstate:
 
@@ -75,33 +67,13 @@ while runstate:
         print ubxMsg 
 
     # Log position (lat,long,alt) and GPS time 
-    elif 'NAV_PVT:' in ubxMsgFields:
+    elif 'NAV_POSLLH:' in ubxMsgFields:
         ubxMsgItems = re.split(': |, |=',ubxMsg)
         locTime = time.time()
-        global_timestamp = local_timestamp + offset 
-        lon = ubxMsgItems[17]
-        lat = ubxMsgItems[18]
-        alt = ubxMsgItems[19]
-
-        # Assuming first altitude parse is drone ground elevation
-        if firstParse == True:
-            rel_alt = 0
-            init_alt = alt 
-            firstParse = False 
-        else:
-            rel_alt = alt - init_alt
-
-        # NED velocity
-        # TODO: check for translation of NED to XYZ 
-        vx = ubxMsgItems[23]
-        vy = ubxMsgItems[24]
-        vz = ubxMsgItems[25]
-
-        # heading of motion 
-        hdg = ubxMsgItems[27]
-
-        logFile.write('%.3f, %s, %s, %.3f, %s, %s, %s, %s, %s, %s\n' % (local_timestamp,\
-         lat, lon, global_timestamp, alt, rel_alt, vx, vy, vz, hdg))
-
+        gpsTime = ubxMsgItems[2]
+        lon = ubxMsgItems[4]
+        lat = ubxMsgItems[6]
+        alt = ubxMsgItems[8]
+        logFile.write('%s, %s, %s, %s, %s\n' % (locTime, lon, lat, gpsTime, alt))
 print("GPS_LOGGER: Ending thread")
 logFile.close()

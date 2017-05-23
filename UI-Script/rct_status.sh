@@ -23,7 +23,7 @@ GPS_LOCK=0
 SDR_CHECK=0
 DISK_SPACE=0
 
-OVERALL_STATUS=0
+# OVERALL_STATUS=0
 
 # # Return a value through __resultvar=$1 (not sure if nessary now)
 # __resultvar=$1
@@ -90,31 +90,48 @@ do
     fi
 
     # Switch all checks complete flag to 1
+    # Condensed both conditionals to prompt start right when checks are complete
+    # Doesn't need the OVERALL_STATUS var anymore
     if ["$OUTPUT_CHECK" -ne "0" ] && [ "#FILE_CHECK" -ne "0" ] && [ "$GPS_LOCK" -ne "0"] \ 
         && [ "$SDR_CHECK" -ne "0"]
-    then
-        $OVERALL_STATUS=1
+    	then
+
+        # $OVERALL_STATUS=1
+
         # Set stateVal to startWait
         stateVal="startWait"
         echo "$(timestamp): All checks complete" >> $log
-    fi
-    done
 
-    # Returns 1 when all checks are performed
-    if [ "$OVERALL_STATUS" -eq "1" ]
-        then
-        # # Used to return __resultvar with OVERALL_STATUS
-        # eval $__resultvar="'$OVERALL_STATUS'"
-
-        # Script is already running
         if pidof -x "$INSTALL_DIR/bin/rct_run" >/dev/null
             then
             continue
         fi
         echo "$(timestamp): Starting rct_run script" >> $log
-        $INSTALL_DIR/bin/rct_run
+        $INSTALL_DIR/bin/rct_run "${stateVal}"
+        # Kills status script after 
         exit 0
+
     fi
+    done
+done
+
+
+    # Returns 1 when all checks are performed
+
+    # if [ "$OVERALL_STATUS" -eq "1" ]
+    #     then
+
+    #     # Script is already running
+    #     if pidof -x "$INSTALL_DIR/bin/rct_run" >/dev/null
+    #         then
+    #         continue
+    #     fi
+    #     echo "$(timestamp): Starting rct_run script" >> $log
+    #     $INSTALL_DIR/bin/rct_run "${stateVal}"
+    #     # Kills status script after 
+    #     exit 0
+    # fi
+
     # else
     #     if pidof -x "$INSTALL_DIR/bin/rct_run" >/dev/null
     #         then
@@ -122,4 +139,4 @@ do
     #         pkill -f rct_run.sh
     #     fi
     # fi
-done
+# done

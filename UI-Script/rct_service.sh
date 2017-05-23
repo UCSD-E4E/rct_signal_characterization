@@ -35,6 +35,10 @@ case "$1" in
 		# Care about results of the check
 		# Just grab what the results were
 		# is it running, whats it running, and what are its errors
+		if pidof -x "$INSTALL_DIR/bin/rct_status" >/dev/null
+            then
+            echo "Status currently running!"
+        fi
 		exit
 		;;
 

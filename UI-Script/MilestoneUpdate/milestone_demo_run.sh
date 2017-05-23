@@ -16,7 +16,7 @@ switch_dir="/sys/class/gpio/gpio$switch_num"
 keep_alive='rct_gps_keep_alive.py'
 sdr_starter='rct_sdr_starter'
 
-status=$1
+STATUS=$1
 
 # Make sure argument passed in is 1 for complete status checks
 # For error handling
@@ -28,8 +28,8 @@ status=$1
 #     exit
 # fi
 
-stateVal="$status"
-
+stateVal="startWait"
+echo "$stateVal"
 while true
 do
     case $stateVal in

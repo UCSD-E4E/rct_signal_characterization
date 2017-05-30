@@ -43,7 +43,7 @@ do
     # check for writiable output directory
     if [ -w $output_dir ]
     then
-        echo "$(timestamp): Output Directory Writeable" >> $log
+        # echo "$(timestamp): Output Directory Writeable" >> $log
         OUTPUT_CHECK=1
 
     else 
@@ -61,7 +61,7 @@ do
     SDR_CHECK=$!
     if [ "$SDR_CHECK" -eq 0 ]
     then
-        echo "$(timestamp): Verify working SDR" >> $log
+        # echo "$(timestamp): Verify working SDR" >> $log
     else
         echo "$(timestamp): SDR not valid!" >> $log
         exit 1
@@ -71,7 +71,7 @@ do
     D_SPACE=`df -k "$output_dir" | tail -1 | tr -s ' ' | cut -d' ' -f4`
     if [ "$D_SPACE" -ge "6000000" ]
     then
-        echo "$(timestamp): Sufficient available disk space" >> $log
+        # echo "$(timestamp): Sufficient available disk space" >> $log
         DISK_SPACE=1
     else
         echo "$(timestamp): Not enough disk space. Allocate more" >> $log
@@ -80,11 +80,11 @@ do
     fi
 
     # Chceking for GPS lock by running python script
-    echo "Searching for GPS lock, calling gpsFixCheck.py" >> $log
+    # echo "Searching for GPS lock, calling gpsFixCheck.py" >> $log
     GPS_LOCK=`python ./gpsFixCheck.py -i /dev/ttyACM0 -b 115200`
     if [ "$GPS_LOCK" -eq "1" ]
     then
-        echo "$(timestamp): GPS LOCK found" >> $log
+        # echo "$(timestamp): GPS LOCK found" >> $log
     else 
         echo "$(timestamp): No Lock" >> $log
     fi

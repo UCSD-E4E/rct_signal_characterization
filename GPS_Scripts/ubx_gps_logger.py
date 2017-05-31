@@ -77,7 +77,7 @@ while runstate:
     # Log position (lat,long,alt) and GPS time 
     elif 'NAV_PVT:' in ubxMsgFields:
         ubxMsgItems = re.split(': |, |=',ubxMsg)
-        locTime = time.time()
+        local_timestamp = time.time()
         global_timestamp = local_timestamp + offset 
         lon = ubxMsgItems[17]
         lat = ubxMsgItems[18]
@@ -89,7 +89,9 @@ while runstate:
             init_alt = alt 
             firstParse = False 
         else:
-            rel_alt = alt - init_alt
+            print str(alt)
+            exit()
+            rel_alt = float(alt) - float(init_alt)
 
         # NED velocity
         # TODO: check for translation of NED to XYZ 

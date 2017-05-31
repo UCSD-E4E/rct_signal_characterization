@@ -418,7 +418,7 @@ TMS6T5B2M2RE</description>
 <class number="0" name="default" width="0" drill="0">
 </class>
 </classes>
-<designrules name="default *">
+<designrules name="default">
 <description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 Die Standard-Design-Rules sind so gewählt, dass sie für 
@@ -447,7 +447,7 @@ design rules under a new name.</description>
 <param name="mdSmdSmd" value="6mil"/>
 <param name="mdViaViaSameLayer" value="6mil"/>
 <param name="mnLayersViaInSmd" value="2"/>
-<param name="mdCopperDimension" value="30mil"/>
+<param name="mdCopperDimension" value="40mil"/>
 <param name="mdDrill" value="6mil"/>
 <param name="mdSmdStop" value="0mil"/>
 <param name="msWidth" value="6mil"/>
@@ -801,19 +801,6 @@ design rules under a new name.</description>
 <wire x1="24.5364" y1="3.2004" x2="24.41" y2="3.07" width="0.1524" layer="1"/>
 <wire x1="63.8556" y1="2.5908" x2="63.9" y2="2.72" width="0.1524" layer="1"/>
 <via x="51.816" y="6.7056" extent="1-16" drill="0.35"/>
-<polygon width="0.1524" layer="1" isolate="0.012">
-<vertex x="0" y="0"/>
-<vertex x="0" y="12"/>
-<vertex x="86" y="12"/>
-<vertex x="86" y="0"/>
-</polygon>
-<polygon width="0.1524" layer="16" isolate="0.012">
-<vertex x="0" y="0"/>
-<vertex x="0" y="12"/>
-<vertex x="86" y="12"/>
-<vertex x="86" y="0"/>
-</polygon>
-<contactref element="S2" pad="1"/>
 </signal>
 <signal name="N$11">
 <contactref element="LED5(BLUE)" pad="A"/>
@@ -942,10 +929,11 @@ design rules under a new name.</description>
 <signal name="N$17">
 <contactref element="JP2" pad="8"/>
 <contactref element="R11" pad="2"/>
+<contactref element="S2" pad="1"/>
 <wire x1="35.052" y1="9.6012" x2="37.9476" y2="9.6012" width="0.1524" layer="1"/>
 <wire x1="37.9476" y1="9.6012" x2="37.98" y2="9.72" width="0.1524" layer="1"/>
 <wire x1="35.052" y1="9.6012" x2="34.99" y2="9.5" width="0.1524" layer="1"/>
-<wire x1="13.5718875" y1="10.7568" x2="14.1968" y2="10.1318875" width="0.1524" layer="16"/>
+<wire x1="13.66434375" y1="10.66434375" x2="14.1968" y2="10.1318875" width="0.1524" layer="16"/>
 <wire x1="14.1968" y1="10.1318875" x2="14.1968" y2="9.2481125" width="0.1524" layer="16"/>
 <wire x1="19.6832" y1="10.3218875" x2="20.3081125" y2="10.9468" width="0.1524" layer="16"/>
 <wire x1="20.3081125" y1="10.9468" x2="21.1918875" y2="10.9468" width="0.1524" layer="16"/>
@@ -961,16 +949,17 @@ design rules under a new name.</description>
 <wire x1="21.1918875" y1="10.9468" x2="21.87" y2="10.2686875" width="0.1524" layer="16"/>
 <wire x1="21.87" y1="10.2686875" x2="22.5481125" y2="10.9468" width="0.1524" layer="16"/>
 <wire x1="13.5718875" y1="10.7568" x2="12.6881125" y2="10.7568" width="0.1524" layer="16"/>
+<wire x1="11.3032" y1="5.3032" x2="7.0922" y2="1.0922" width="0.1524" layer="16"/>
+<wire x1="13.66434375" y1="10.66434375" x2="13.5718875" y2="10.7568" width="0.1524" layer="16"/>
 <wire x1="12.6881125" y1="10.7568" x2="11.3032" y2="9.3718875" width="0.1524" layer="16"/>
+<wire x1="11.3032" y1="9.3718875" x2="11.3032" y2="5.3032" width="0.1524" layer="16"/>
+<wire x1="7.0922" y1="1.0922" x2="4.0922" y2="1.0922" width="0.1524" layer="16"/>
 <wire x1="4.0922" y1="1.0922" x2="4" y2="1" width="0.1524" layer="16"/>
+<wire x1="4" y1="1" x2="4" y2="2.0538" width="0.1524" layer="16"/>
+<wire x1="4" y1="2.0538" x2="4.41" y2="2.4638" width="0.1524" layer="16"/>
+</signal>
+<signal name="N$7">
 <contactref element="S2" pad="2"/>
-<wire x1="7.1085625" y1="6.5786" x2="5.5214375" y2="6.5786" width="0.1524" layer="16"/>
-<wire x1="5.5214375" y1="6.5786" x2="5.4768" y2="6.6232375" width="0.1524" layer="16"/>
-<wire x1="5.4768" y1="6.6232375" x2="5.4768" y2="6.6294" width="0.1524" layer="16"/>
-<wire x1="5.4768" y1="6.6294" x2="4.41" y2="7.6962" width="0.1524" layer="16"/>
-<wire x1="12.6881125" y1="10.7568" x2="11.2867625" y2="10.7568" width="0.1524" layer="16"/>
-<wire x1="11.2867625" y1="10.7568" x2="7.1085625" y2="6.5786" width="0.1524" layer="16"/>
-<wire x1="4.0922" y1="1.0922" x2="5.5214375" y2="6.5786" width="0" layer="19" extent="16-16"/>
 </signal>
 </signals>
 <errors>

@@ -38,9 +38,9 @@ def main():
 	    ubxMsgFields = ubxMsg.split()
 
 	    # Return only when 3D fix is acquired 
-	    if 'NAV_STATUS:' in ubxMsgFields:
+	    if 'NAV_PVT:' in ubxMsgFields:
 	        ubxMsgItems = re.split(': |, |=',ubxMsg)
-	        if 'gpsFix=3,' in ubxMsgFields:
+	        if 'fixType=3,' in ubxMsgFields:
 	        	return 0
 	        else:
 	        	continue 

@@ -12,3 +12,12 @@ To integrate these series of the script into the project,
 
 	To integrate with the original E4E RCT project, rct_status and rct_run
 	will replace the old rctrun.sh
+
+
+LED Interface:
+Status Check PIN and LED Mapping:
+1) Sane output Directory 		GPIO Pin 12		LED GREEN
+2) Writable Output Directory	GPIO Pin 14		LED YELLOW
+3) Verify SDR					GPIO Pin 16		LED HYPERRED (orange)
+4) Available Disk Space			GPIO Pin 18		LED BRIGHT RED
+5) GPS 3D Fix					GPIO Pin 20		LED BLUE

@@ -28,24 +28,28 @@ void displayStatus(int count, int finish){
 }
 
 int main(int argc, char const *argv[]){
-	fftw_complex* fft_in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * FFT_LEN);
+	const int NUM_FFT = 2;
+	// if(!fftw_init_threads()){
+	// 	std::cerr << "Failed to initialize FFTW threads!" << std::endl;
+	// }
+	fftw_complex* fft_in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * FFT_LEN * NUM_FFT);
 	if(fft_in == nullptr){
 		std::cerr << "Failed to allocate fft_in!" << std::endl;
 		return -1;
 	}
-	fftw_complex* fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * FFT_LEN);
+	fftw_complex* fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * FFT_LEN * NUM_FFT);
 	if(fft_out == nullptr){
 		std::cerr << "Failed to allocate fft_out!" << std::endl;
 		return -1;
 	}
 
-	if(!fftw_init_threads()){
-		std::cerr << "Failed to initialize FFTW threads!" << std::endl;
-	}
 
-	fftw_plan_with_nthreads(7);
+	// fftw_plan_with_nthreads(1);
 
-	fftw_plan fft_plan = fftw_plan_dft_1d(FFT_LEN, fft_in, fft_out, FFTW_FORWARD, FFTW_MEASURE);
+	int fft_size[] = {FFT_LEN};
+	const int FFT_DIST = 1;
+
+	fftw_plan fft_plan = fftw_plan_many_dft(1, fft_size, NUM_FFT, fft_in, NULL, NUM_FFT, FFT_DIST, fft_out, NULL, NUM_FFT, FFT_DIST, FFTW_FORWARD, FFTW_MEASURE);
 
 	std::ifstream inFile{"output", std::ios::binary | std::ios::in};
 	std::ofstream outFile{"processedOutput", std::ios::binary | std::ios::out};
@@ -94,9 +98,9 @@ int main(int argc, char const *argv[]){
 	outFile.close();
 	inFile.close();
 	fftw_destroy_plan(fft_plan);
-	fftw_cleanup_threads();
 	fftw_cleanup();
 	fftw_free(fft_out);
 	fftw_free(fft_in);
+	// fftw_cleanup_threads();
 	return 0;
 }
